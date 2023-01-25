@@ -5,8 +5,6 @@ orbs:
 
 commands:
   notify_on_failure:
-      docker:
-       - image: cimg/base:stable 
       steps:
       - slack/notify:
           custom: |
@@ -52,7 +50,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
-      - notify_on_failure
+        - notify_on_failure
 
   build-backend:
     docker:
