@@ -28,7 +28,6 @@ commands:
               ]
             }
           event: fail  
-          debug: true
 
 
 # -------------jobs -------------
