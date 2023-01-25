@@ -5,6 +5,8 @@ orbs:
 
 commands:
   notify_on_failure:
+      docker:
+       - image: cimg/base:stable 
       steps:
       - slack/notify:
           custom: |
