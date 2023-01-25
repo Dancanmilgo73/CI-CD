@@ -3,6 +3,35 @@ orbs:
   slack: circleci/slack@4.1
 
 
+ commands:
+    notify_on_failure:
+        steps:
+        - slack/notify:
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "---IGNORE THIS, TESTING SLACK NOTIFICATIONS😀---",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Pipeline failed!!!",
+                      "emoji": true
+                    }
+                  }
+                ]
+              }
+            event: fail  
+            dubug: true
+
+
 # -------------jobs -------------
 jobs:
   build-frontend:
@@ -21,6 +50,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - notify_on_failure
 
   build-backend:
     docker:
@@ -38,6 +68,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - notify_on_failure         
 
   test-frontend:
     docker:
@@ -51,6 +82,7 @@ jobs:
           command: |
             cd frontend
             npm run test
+      - notify_on_failure            
 
   test-backend:
     docker:
@@ -64,6 +96,7 @@ jobs:
           command: |
             cd backend
             npm run test
+      - notify_on_failure            
 
   scan-frontend:
     docker:
@@ -80,6 +113,7 @@ jobs:
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
+      - notify_on_failure            
 
   scan-backend:
     docker:
@@ -95,44 +129,22 @@ jobs:
             npm install
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
-            npm audit --audit-level=critical   
-
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "Pipeline Failed.Testing notification.",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always               
+            npm audit --audit-level=critical 
+      - notify_on_failure              
+         
 
 
 # Added env variable
 workflows:
   default:
     jobs:
-      # - build-frontend
+      - build-frontend
       # - build-backend
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
       #     requires: [build-backend]  
-      # - scan-frontend:
-      #     requires: [build-frontend]                        
+      - scan-frontend:
+          requires: [build-frontend]                        
       # - scan-backend:
       #     requires: [build-backend]
-      - notify:
-          context: slack-secrets
