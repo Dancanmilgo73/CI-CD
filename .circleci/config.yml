@@ -1,40 +1,34 @@
 version: 2.1
 orbs:
   slack: circleci/slack@4.1
+
 commands:
   notify_on_failure:
     steps:
       - slack/notify:
-          event: fail
-          template: basic_fail_1
-
-# commands:
-#   notify_on_failure:
-#     steps:
-#       - slack/notify:
-#           custom: |
-#             {
-#               "blocks": [
-#                 {
-#                   "type": "header",
-#                   "text": {
-#                     "type": "plain_text",
-#                     "text": "---IGNORE THIS, TESTING SLACK NOTIFICATIONS😀---",
-#                     "emoji": true
-#                   }
-#                 },
-#                 {
-#                   "type": "section",
-#                   "text": {
-#                     "type": "plain_text",
-#                     "text": "Pipeline failed!!!",
-#                     "emoji": true
-#                   }
-#                 }
-#               ]
-#             }
-#           event: fail  
-#           dubug: true
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "---IGNORE THIS, TESTING SLACK NOTIFICATIONS😀---",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Pipeline failed!!!",
+                    "emoji": true
+                  }
+                }
+              ]
+            }
+          event: fail  
+          debug: true
 
 
 # -------------jobs -------------
