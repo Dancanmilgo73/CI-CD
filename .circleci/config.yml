@@ -3,33 +3,33 @@ orbs:
   slack: circleci/slack@4.1
 
 
- commands:
-    notify_on_failure:
-        steps:
-        - slack/notify:
-            custom: |
-              {
-                "blocks": [
-                  {
-                    "type": "header",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "---IGNORE THIS, TESTING SLACK NOTIFICATIONS😀---",
-                      "emoji": true
-                    }
-                  },
-                  {
-                    "type": "section",
-                    "text": {
-                      "type": "plain_text",
-                      "text": "Pipeline failed!!!",
-                      "emoji": true
-                    }
+commands:
+  notify_on_failure:
+      steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "---IGNORE THIS, TESTING SLACK NOTIFICATIONS😀---",
+                    "emoji": true
                   }
-                ]
-              }
-            event: fail  
-            dubug: true
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Pipeline failed!!!",
+                    "emoji": true
+                  }
+                }
+              ]
+            }
+          event: fail  
+          dubug: true
 
 
 # -------------jobs -------------
