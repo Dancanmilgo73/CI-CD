@@ -136,7 +136,9 @@ jobs:
       - image: cimg/python:3.10  
     steps:
       - checkout
-      - install_awscli
+      - run:
+          name: install_awscli
+          command: install_awscli
       - run:
           name: Ensure frontend infrastructure exist
           command: |
