@@ -33,6 +33,7 @@
     -  TYPEORM_MIGRATIONS: "{{ lookup('env', 'TYPEORM_MIGRATIONS') }}"
     -  TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST') }}"
     -  TYPEORM_PORT: "{{ lookup('env', 'TYPEORM_PORT') }}"
+    -  BACKEND_PORT: "{{ lookup('env', 'BACKEND_PORT') }}"
     -  TYPEORM_USERNAME: "{{ lookup('env', 'TYPEORM_USERNAME') }}"
     -  TYPEORM_PASSWORD: "{{ lookup('env', 'TYPEORM_PASSWORD') }}"
     -  TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE') }}"
