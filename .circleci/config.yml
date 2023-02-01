@@ -323,6 +323,8 @@ jobs:
           command: |
             cd backend
             npm install 
+            echo TYPEORM_ENTITIES>>$TYPEORM_ENTITIES
+            touch .env
             echo TYPEORM_ENTITIES>>$TYPEORM_ENTITIES >> ".env"
             echo TYPEORM_CONNECTION>>$TYPEORM_CONNECTION >> ".env"
             echo TYPEORM_MIGRATIONS_DIR>>$TYPEORM_MIGRATIONS_DIR >> ".env"
