@@ -233,11 +233,6 @@ jobs:
           fingerprints: ["69:9f:f4:5a:1a:f3:e4:1f:0a:5a:ea:15:aa:22:00:b2"]
       - attach_workspace:
           at: ~/          
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       # Your code here
-      #       exit 1
       - run:
           name: Run Configure Server Ansible play
           command: |
@@ -327,7 +322,17 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
-            npm install        
+            npm install 
+            echo TYPEORM_ENTITIES>>$TYPEORM_ENTITIES > ".env"
+            echo TYPEORM_CONNECTION>>$TYPEORM_CONNECTION >> ".env"
+            echo TYPEORM_MIGRATIONS_DIR>>$TYPEORM_MIGRATIONS_DIR >> ".env"
+            echo TYPEORM_MIGRATIONS>>$TYPEORM_MIGRATIONS >> ".env"
+            echo TYPEORM_HOST>>$TYPEORM_HOST >> ".env"
+            echo TYPEORM_PORT>>$TYPEORM_PORT >> ".env"
+            echo TYPEORM_USERNAME>>$TYPEORM_USERNAME >> ".env"
+            echo TYPEORM_PASSWORD>>$TYPEORM_PASSWORD >> ".env"
+            echo TYPEORM_DATABASE>>$TYPEORM_DATABASE >> ".env"
+                         
       - run:
           name: Package Backend
           command: |
