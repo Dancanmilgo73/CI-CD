@@ -68,10 +68,6 @@ commands:
             curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
             sudo apt install -y nodejs
 
-            # Use n version manager to use Node.js v13.8.0
-            sudo npm install --global n
-            sudo n 13.8.0
-
   revert-migrations:
     description: Revert the last migration, if any were executed during the current workflow
     parameters:
@@ -172,7 +168,7 @@ jobs:
           name: Audit front-end
           command: |
             cd frontend
-            npm install oauth-sign@^0.9.0
+            # npm install oauth-sign@^0.9.0
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
@@ -221,7 +217,7 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-            BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
+            export BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
@@ -304,6 +300,7 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
 
+            echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030"
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             cat frontend/.env                       
       - run:
