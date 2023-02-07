@@ -457,6 +457,7 @@ workflows:
           filters:
             branches:
               only: [master] 
+              # verify that deploy infrastructure only run on master branch
       - configure-infrastructure:
           requires: [deploy-infrastructure]               
       - run-migrations:
