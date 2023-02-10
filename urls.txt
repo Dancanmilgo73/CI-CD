@@ -1,0 +1,3 @@
+Github repo: https://github.com/Dancanmilgo73/CI-CD.git
+
+S3(Front End): http://udapeople-583fa98.s3-website-us-east-1.amazonaws.com/
