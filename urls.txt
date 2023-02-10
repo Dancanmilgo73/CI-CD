@@ -1,3 +1,10 @@
-Github repo: https://github.com/Dancanmilgo73/CI-CD.git
+[URL01]: Github repo: https://github.com/Dancanmilgo73/CI-CD.git
 
-S3(Front End): http://udapeople-583fa98.s3-website-us-east-1.amazonaws.com/
+[URL02]: http://udapeople-88f2f53.s3-website-us-east-1.amazonaws.com/
+
+[URL03]: http://d3oxren0fjbg08.cloudfront.net/#/employees
+
+[URL04]: http://ec2-35-168-242-130.compute-1.amazonaws.com:3030/api/status
+
+[URL05]: http://ec2-3-237-235-128.compute-1.amazonaws.com:9090/
+
